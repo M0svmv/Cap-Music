@@ -370,6 +370,9 @@ input[type="range"]:hover::-ms-thumb {
 .cardName {
     font-size: 1.1rem;
 }
+.cardBtns{
+    width: 20%;
+}
 
 .art {
     padding-bottom: 5px;
@@ -381,17 +384,18 @@ input[type="range"]:hover::-ms-thumb {
     width: 70%;
 }
 
-.favCard {
+.favCard,.listCard {
     width: 35px;
     background: none;
     border: none;
     padding-right: 10px;
+    cursor: pointer;
 }
 
 .favCard:hover {
     transform: scale(1.2);
     transition: all 200ms ease-in-out;
-    cursor: pointer;
+    
 }
 
 .search {
@@ -612,7 +616,7 @@ input[type="range"]:hover::-ms-thumb {
     }
 
     .card {
-        width: 165px;
+        width: 170px;
     }
 
     .favallBtn,
@@ -663,7 +667,12 @@ input[type="range"]:hover::-ms-thumb {
 }
 
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
+    main{
+        position: absolute;
+        top: 0;
+        
+    }
     #listQueue{
         position: absolute;
         top: 55px;
@@ -686,13 +695,33 @@ input[type="range"]:hover::-ms-thumb {
     }
 }
 
-@media (max-width: 550px){
+@media screen and (max-width: 550px){
+    .secMid {
+        justify-self: center;
+        height: calc(100% - 12vh);
+        width: 100%;
+        z-index: 2;
+        align-items: normal;
+        padding-right: 3px;
+        position: absolute;
+        top:12vh;
+    }
+
+    .mainSec {
+        height: 70%;
+    }
+
+    .player {
+        height: 15%;
+        position: relative;
+        bottom: 65px;
+    }
 .card{
-    width: 160px;
+    width: 165px;
 
 }
 }
-@media (max-width: 350px){
+@media screen and (max-width: 350px){
 .card{
     width: 150px;
 
