@@ -212,9 +212,17 @@ document.addEventListener('DOMContentLoaded', () => {
             let addtofavs = document.createElement("button");
             addtofavs.classList.add("favCard");
             addtofavs.style.right = "50px";
+            let addtolist = document.createElement("button");
+            addtolist.classList.add("listCard");
+            addtolist.style.right = "100px";
+            let cardBtns = document.createElement("div");
+            cardBtns.classList.add("cardBtns");
     
             let heart = document.createElement("img");
+            let add = document.createElement("img");
+            add.classList.add("iconhov");
 heart.id = `fav-${ele.title.replace(/ /g, "-")}`;
+add.id = `add-${ele.title.replace(/ /g, "-")}`;
 
 if (localStorage.getItem("darkMode") === "1") {
     heart.src = favplaylist.some(fav => fav.title === ele.title) 
@@ -225,7 +233,13 @@ if (localStorage.getItem("darkMode") === "1") {
         ? "./assets/imgs/heart_check.svg" 
         : "./assets/imgs/favorite2.svg";
 }
+if (localStorage.getItem("darkMode") === "1") {
+    add.src = "./assets/imgs/add-dark.svg";
+} else {
+    add.src = "./assets/imgs/add.svg";
+}
             addtofavs.appendChild(heart);
+            addtolist.appendChild(add);
     
             addtofavs.addEventListener("click", () => {
                 if (!favplaylist.some(fav => fav.title === ele.title)) {
@@ -242,12 +256,16 @@ if (localStorage.getItem("darkMode") === "1") {
                 playlistQueue.push(ele);
                 savePlaylistQueue();
                 displayPlayList();
-                if (playlistQueue.length === 1) {
-                    playSong(0);
-                }
+                playSong(playlistQueue.length-1);
             });
     
             fontDiv.addEventListener("click", () => {
+                playlistQueue.push(ele);
+                savePlaylistQueue();
+                displayPlayList();
+                playSong(playlistQueue.length-1);
+            });
+            addtolist.addEventListener("click", () => {
                 playlistQueue.push(ele);
                 savePlaylistQueue();
                 displayPlayList();
@@ -260,7 +278,9 @@ if (localStorage.getItem("darkMode") === "1") {
             fontDiv.appendChild(name);
             fontDiv.appendChild(art);
             card.appendChild(fontDiv);
-            card.appendChild(addtofavs);
+            cardBtns.appendChild(addtofavs);
+            cardBtns.appendChild(addtolist);
+            card.appendChild(cardBtns);
             main.appendChild(card);
         });
     };
@@ -298,6 +318,7 @@ if (localStorage.getItem("darkMode") === "1") {
             addtofavs.style.right = "50px";
     
             let heart = document.createElement("img");
+            heart.classList.add("iconhov");
 heart.id = `fav-${ele.title.replace(/ /g, "-")}`;
 
 if (localStorage.getItem("darkMode") === "1") {
@@ -309,9 +330,10 @@ if (localStorage.getItem("darkMode") === "1") {
         ? "./assets/imgs/heart_check.svg" 
         : "./assets/imgs/favorite2.svg";
 }
-    
-            heart.classList.add("iconhov");
             addtofavs.appendChild(heart);
+    
+            
+            
     
             let removefromqueue = document.createElement("button");
             let removeimg = document.createElement('img');
@@ -349,8 +371,27 @@ if (localStorage.getItem("darkMode") === "1") {
             addtofavs.addEventListener("click", () => {
                 if (!favplaylist.some(fav => fav.title === ele.title)) {
                     favplaylist.push(ele);
+                    if (localStorage.getItem("darkMode") === "1") {
+                        heart.src = favplaylist.some(fav => fav.title === ele.title) 
+                            ? "./assets/imgs/heart_check-dark.svg" 
+                            : "./assets/imgs/favorite2-dark.svg";
+                    } else {
+                        heart.src = favplaylist.some(fav => fav.title === ele.title) 
+                            ? "./assets/imgs/heart_check.svg" 
+                            : "./assets/imgs/favorite2.svg";
+                    }
+
                 } else {
                     favplaylist = favplaylist.filter(element => element.title !== ele.title);
+                    if (localStorage.getItem("darkMode") === "1") {
+                        heart.src = favplaylist.some(fav => fav.title === ele.title) 
+                            ? "./assets/imgs/heart_check-dark.svg" 
+                            : "./assets/imgs/favorite2-dark.svg";
+                    } else {
+                        heart.src = favplaylist.some(fav => fav.title === ele.title) 
+                            ? "./assets/imgs/heart_check.svg" 
+                            : "./assets/imgs/favorite2.svg";
+                    }
                 }
                 saveFavPlayList();
                 updateFavoriteIcon(ele);
